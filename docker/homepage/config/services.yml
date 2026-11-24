@@ -1,0 +1,43 @@
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Media:
+    - Plex:
+        icon: plex.png
+        href: "http://localhost:32400"
+        description: "Media Streaming"
+        container: plex # Automatically pulls stats via Docker socket
+    - Immich:
+        icon: immich.png
+        href: "http://localhost:2283"
+        description: "Photo & Video Backup"
+        container: immich_server
+        widget:
+          type: immich
+          url: "http://immich_server:2283"
+          key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
+          version: 2
+          fields: ["photos", "videos", "storage"]
+    - Dawarich:
+        icon: dawarich.png # or map-marker-radius / location-dot
+        href: "http://localhost:3000" # URL to open Dawarich when clicked
+        description: "Location & Timeline Tracker"
+        container: dawarich_app # Optional: matches your container name for Docker stats
+        widget:
+          type: customapi
+          url: "http://dawarich_app:3000/api/v1/health" # Internal container URL
+          refreshInterval: 10000
+          display: list
+          mappings:
+            - field: status
+              label: Status
+
+- Utilities:
+    - My Second Service:
+        href: http://localhost/
+        description: Homepage is the best
+
+- Shortcuts:
+    - My Third Service:
+        href: http://localhost/
+        description: Homepage is 😎

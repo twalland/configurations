@@ -1,0 +1,24 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:v2.7.0
+    container_name: homepage
+    ports:
+      - "8100:3000"
+    environment:
+      - TZ=America/New_York
+      - HOMEPAGE_ALLOWED_HOSTS=localhost:8100,127.0.0.1:8100,192.168.0.10:8100
+      - HOMEPAGE_VAR_IMMICH_API_KEY=DxBw6FXqakVIaHfgbCTyxLpgXut1nhBftgtYSvBPPw
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - immich_default
+      - dawarich_network
+    restart: unless-stopped
+
+networks:
+  immich_default:
+    external: true
+  dawarich_network:
+    name: dawarich_dawarich
+    external: true
