@@ -41,6 +41,11 @@ ln -s /Users/thomas/Github/configurations/docker/plex/docker-compose.yml /Users/
 mkdir -p /Users/thomas/Docker/Nextcloud
 ln -s /Users/thomas/Github/configurations/docker/nextcloud/docker-compose.yml /Users/thomas/Docker/Nextcloud/docker-compose.yml
 
+# Grafana
+mkdir -p /Users/thomas/Docker/Grafana
+ln -s /Users/thomas/Github/configurations/docker/grafana/docker-compose.yml /Users/thomas/Docker/Grafana/docker-compose.yml
+
+
 
 
 
