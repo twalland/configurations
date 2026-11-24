@@ -45,6 +45,16 @@ ln -s /Users/thomas/Github/configurations/docker/nextcloud/docker-compose.yml /U
 mkdir -p /Users/thomas/Docker/Grafana
 ln -s /Users/thomas/Github/configurations/docker/grafana/docker-compose.yml /Users/thomas/Docker/Grafana/docker-compose.yml
 
+# Dawarich
+mkdir -p /Users/thomas/Docker/Dawarich
+ln -s /Users/thomas/Github/configurations/docker/dawarich/docker-compose.yml /Users/thomas/Docker/Dawarich/docker-compose.yml
+
+# Immich
+# Has a .env file, so it needs to be created manually
+mkdir -p /Users/thomas/Docker/Immich
+ln -s /Users/thomas/Github/configurations/docker/immich/docker-compose.yml /Users/thomas/Docker/Immich/docker-compose.yml
+
+
 
 
 
