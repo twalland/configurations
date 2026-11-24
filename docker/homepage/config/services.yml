@@ -20,6 +20,11 @@
           fields: ["photos", "videos", "storage"]
 
 - Location & Travel:
+    - Endurain:
+        icon: endurain.png
+        href: "http://10.1.1.2:8085"
+        description: "Fitness & Activity Tracker"
+        container: endurain-app
     - Dawarich:
         icon: dawarich.png
         href: "http://localhost:3000"
