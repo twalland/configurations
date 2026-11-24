@@ -6,7 +6,7 @@
         icon: plex.png
         href: "http://localhost:32400"
         description: "Media Streaming"
-        container: plex # Automatically pulls stats via Docker socket
+        container: plex
     - Immich:
         icon: immich.png
         href: "http://localhost:2283"
@@ -18,26 +18,110 @@
           key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
           version: 2
           fields: ["photos", "videos", "storage"]
+
+- Location & Travel:
     - Dawarich:
-        icon: dawarich.png # or map-marker-radius / location-dot
-        href: "http://localhost:3000" # URL to open Dawarich when clicked
+        icon: dawarich.png
+        href: "http://localhost:3000"
         description: "Location & Timeline Tracker"
-        container: dawarich_app # Optional: matches your container name for Docker stats
+        container: dawarich_app
         widget:
           type: customapi
-          url: "http://dawarich_app:3000/api/v1/health" # Internal container URL
+          url: "http://dawarich_app:3000/api/v1/health"
           refreshInterval: 10000
           display: list
           mappings:
             - field: status
               label: Status
+    - Garmin Dawarich Sync:
+        icon: garmin.png
+        href: "http://localhost:8082"
+        description: "Garmin Activity Sync"
+        container: dawarich_garmin_sync
+    - Airtrail:
+        icon: plane.png
+        href: "http://localhost:3100"
+        description: "Flight & Travel Log"
+        container: airtrail
+    - Wanderer:
+        icon: wanderer.png
+        href: "http://localhost:3400"
+        description: "Trail & Hiking Tracker"
+        container: wanderer-web
 
-- Utilities:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+- Home & Monitoring:
+    - Home Assistant:
+        icon: home-assistant.png
+        href: "http://localhost:8123"
+        description: "Home Automation Platform"
+        container: homeassistant
+    - Grafana:
+        icon: grafana.png
+        href: "http://localhost:3500"
+        description: "Metrics & Analytics Dashboards"
+        container: grafana
+    - InfluxDB:
+        icon: influxdb.png
+        href: "http://localhost:8086"
+        description: "Time Series Database"
+        container: influxdb
 
-- Shortcuts:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+- Cloud & Storage:
+    - Nextcloud:
+        icon: nextcloud.png
+        href: "http://localhost:8081"
+        description: "Cloud Storage & Collaboration"
+        container: nextcloud
+
+- Infrastructure & Supporting Services:
+    - Nextcloud MariaDB:
+        icon: mariadb.png
+        description: "Nextcloud Relational Database"
+        container: nextcloud-db
+    - Nextcloud Redis:
+        icon: redis.png
+        description: "Nextcloud In-Memory Cache"
+        container: nextcloud-redis
+    - Immich Machine Learning:
+        icon: immich.png
+        description: "Machine Learning Model Inference"
+        container: immich_machine_learning
+    - Immich PostgreSQL:
+        icon: postgresql.png
+        description: "Immich Vector Database"
+        container: immich_postgres
+    - Immich Valkey:
+        icon: valkey.png
+        description: "Immich Cache & Queue"
+        container: immich_redis
+    - Dawarich Sidekiq:
+        icon: ruby.png
+        description: "Background Processing Worker"
+        container: dawarich_sidekiq
+    - Dawarich PostGIS:
+        icon: postgresql.png
+        description: "Geospatial Database"
+        container: dawarich_db
+    - Dawarich Redis:
+        icon: redis.png
+        description: "Dawarich Cache & Queue"
+        container: dawarich_redis
+    - Dawarich Photon:
+        icon: openstreetmap.png
+        href: "http://localhost:2322"
+        description: "Reverse Geocoding API"
+        container: dawarich_photon
+    - Airtrail Database:
+        icon: postgresql.png
+        description: "Airtrail PostgreSQL Database"
+        container: airtrail_db
+    - Wanderer PocketBase:
+        icon: pocketbase.svg
+        href: "http://localhost:8090"
+        description: "Wanderer Backend & Database"
+        container: wanderer-db
+    - Wanderer Meilisearch:
+        icon: meilisearch.png
+        href: "http://localhost:7700"
+        description: "Wanderer Search Engine"
+        container: wanderer-search

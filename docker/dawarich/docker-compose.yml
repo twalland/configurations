@@ -175,12 +175,12 @@ services:
       - "2322:2322"
     environment:
       # - IMPORT_MODE=jsonl
-      - REGION=planet
+      - REGION=europe
       - LANGUAGES=en,de
       - UPDATE_STRATEGY=PARALLEL
       - UPDATE_INTERVAL=2160h
     volumes:
-      - ./photon_data:/photon/photon_data
+      - ./photon_data:/photon/data
 
   garmin-dawarich-sync: 
     image: marucjmar/garmin-dawarich-sync:latest

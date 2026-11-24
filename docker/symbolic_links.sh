@@ -39,6 +39,7 @@ mkdir -p /Users/thomas/Docker/Homepage/config
 ln -s /Users/thomas/Github/configurations/docker/homepage/docker-compose.yml /Users/thomas/Docker/Homepage/docker-compose.yml
 ln /Users/thomas/Github/configurations/docker/homepage/config/services.yml /Users/thomas/Docker/Homepage/config/services.yaml
 ln /Users/thomas/Github/configurations/docker/homepage/config/widgets.yml /Users/thomas/Docker/Homepage/config/widgets.yaml
+ln /Users/thomas/Github/configurations/docker/homepage/config/docker.yaml /Users/thomas/Docker/Homepage/config/docker.yaml
 
 # Immich
 # Has a .env file, so it needs to be created manually
