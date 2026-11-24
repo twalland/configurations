@@ -15,6 +15,11 @@
 mkdir -p /Users/thomas/Docker/Endurain
 ln -s /Users/thomas/Github/configurations/docker/endurain/docker-compose.yml /Users/thomas/Docker/Endurain/docker-compose.yml
 
+# Airtrail
+# Has a .env file, so it needs to be created manually
+mkdir -p /Users/thomas/Docker/Airtrail
+ln -s /Users/thomas/Github/configurations/docker/airtrail/docker-compose.yml /Users/thomas/Docker/Airtrail/docker-compose.yml
+
 # Homepage
 mkdir -p /Users/thomas/Docker/Homepage/config
 ln -s /Users/thomas/Github/configurations/docker/homepage/docker-compose.yml /Users/thomas/Docker/Homepage/docker-compose.yml
@@ -24,7 +29,7 @@ ln /Users/thomas/Github/configurations/docker/homepage/config/widgets.yml /Users
 # Wanderer
 # Has a .env file, so it needs to be created manually
 mkdir -p /Users/thomas/Docker/Wanderer
-ln -s /Users/thomas/Github/configurations/wanderer/docker-compose.yml /Users/thomas/Docker/Wanderer/docker-compose.yml
+ln -s /Users/thomas/Github/configurations/docker/wanderer/docker-compose.yml /Users/thomas/Docker/Wanderer/docker-compose.yml
 
 
 # Add a section here to reverse link the .env files into the GitHub repo if they exist in the Docker setup folder
