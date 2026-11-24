@@ -24,7 +24,7 @@
         icon: endurain.png
         href: "http://10.1.1.2:8085"
         description: "Fitness & Activity Tracker"
-        container: endurain-app
+        ping: "http://10.1.1.2:8085"
     - Dawarich:
         icon: dawarich.png
         href: "http://localhost:3000"
