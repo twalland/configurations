@@ -1,0 +1,26 @@
+services:
+  plex:
+    image: linuxserver/plex:1.43.5
+    container_name: plex
+    # Remove or comment out network_mode: host
+    # network_mode: host
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp       # Plex Companion
+      - 1900:1900/udp       # DLNA service
+      - 32410:32410/udp     # GDM network discovery
+      - 32412:32412/udp     # GDM network discovery
+      - 32413:32413/udp     # GDM network discovery
+      - 32414:32414/udp     # GDM network discovery
+      - 32469:32469/tcp     # Plex DLNA Server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM:-}
+    volumes:
+      - ./config:/config
+      - /Volumes/Backup 1/Media/Shows:/tv
+      - /Volumes/Backup 1/Media/Movies:/movies
+    restart: unless-stopped
