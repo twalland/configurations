@@ -54,6 +54,13 @@ ln -s /Users/thomas/Github/configurations/docker/dawarich/docker-compose.yml /Us
 mkdir -p /Users/thomas/Docker/Immich
 ln -s /Users/thomas/Github/configurations/docker/immich/docker-compose.yml /Users/thomas/Docker/Immich/docker-compose.yml
 
+# Home Assistant
+# Has a .env file, so it needs to be created manually
+mkdir -p "/Users/thomas/Docker/Home Assistant/config"
+ln -s /Users/thomas/Github/configurations/docker/homeassistant/docker-compose.yml "/Users/thomas/Docker/Home Assistant/docker-compose.yml"
+ln /Users/thomas/Github/configurations/docker/homeassistant/config/configuration.yaml "/Users/thomas/Docker/Home Assistant/config/configuration.yaml"
+
+
 
 
 

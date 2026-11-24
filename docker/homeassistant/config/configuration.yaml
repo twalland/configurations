@@ -1,0 +1,672 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+# scene: !include scenes.yaml
+
+influxdb:
+  host: influxdb
+  port: 8086
+  database: homeassistant
+  username: thomas
+  password: homeassistant1234!
+  max_retries: 3
+  default_measurement: state
+  exclude:
+    domains:
+      - person
+      - automation
+      - binary_sensor
+  include:
+    entity_globs:
+      - sensor.energy_*
+      - sensor.heat_*
+      - sensor.julia_walland_*
+      - sensor.solarnet_*
+      - sensor.technikraum_*
+      - sensor.boesch_*
+      - sensor.power_*
+
+modbus:
+  - name: boesch_mozart_hub
+    type: tcp
+    host: "10.1.1.21"
+    port: 502
+    delay: 2
+    message_wait_milliseconds: 100
+    timeout: 5
+    sensors:
+      # --- WÄRMEPUMPE (Geräte Adresse / Slave 40) ---
+      - name: "Boesch Aussentemperatur"
+        unique_id: boesch_aussentemperatur
+        slave: 40
+        address: 3
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Vorlauftemperatur WP"
+        unique_id: boesch_vorlauftemperatur_wp
+        slave: 40
+        address: 50
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Ruecklauftemperatur WP"
+        unique_id: boesch_ruecklauftemperatur_wp
+        slave: 40
+        address: 51
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Durchfluss WP"
+        unique_id: boesch_durchfluss_wp
+        slave: 40
+        address: 52
+        input_type: holding
+        data_type: int16
+        scale: 0.01
+        precision: 2
+        unit_of_measurement: "l/min"
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktueller COP"
+        unique_id: boesch_aktueller_cop
+        slave: 40
+        address: 100
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktueller COP (Heizen)"
+        unique_id: boesch_aktueller_cop_heizen
+        slave: 40
+        address: 101
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktueller COP (TWE)"
+        unique_id: boesch_aktueller_cop_twe
+        slave: 40
+        address: 102
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Waermeleistung Gesamt"
+        unique_id: boesch_aktuelle_leistung_waerme_gesamt
+        slave: 40
+        address: 104
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Waermeleistung Heizen"
+        unique_id: boesch_aktuelle_leistung_waerme_heizen
+        slave: 40
+        address: 105
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Waermeleistung TWE"
+        unique_id: boesch_aktuelle_leistung_waerme_twe
+        slave: 40
+        address: 106
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Elektrische Leistung Gesamt"
+        unique_id: boesch_aktuelle_leistung_elektrisch_gesamt
+        slave: 40
+        address: 108
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Elektrische Leistung Heizen"
+        unique_id: boesch_aktuelle_leistung_elektrisch_heizen
+        slave: 40
+        address: 109
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Aktuelle Elektrische Leistung TWE"
+        unique_id: boesch_aktuelle_leistung_elektrisch_twe
+        slave: 40
+        address: 110
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "kW"
+        device_class: power
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Status Code"
+        unique_id: boesch_status_code
+        slave: 40
+        address: 200
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Betriebsstunden Verdichter"
+        unique_id: boesch_betriebsstunden_verdichter
+        slave: 40
+        address: 152
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: "h"
+        device_class: duration
+        state_class: total_increasing
+        scan_interval: 60
+
+      - name: "Boesch Verdichterstarts"
+        unique_id: boesch_verdichterstarts
+        slave: 40
+        address: 153
+        input_type: holding
+        data_type: int16
+        state_class: total_increasing
+        scan_interval: 60
+
+      # --- HEIZKREISMODUL: Temperaturen & Sollwerte (Slave 50) ---
+      - name: "Boesch Puffer Isttemperatur"
+        unique_id: boesch_puffer_temperatur_ist
+        slave: 50
+        address: 1
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Puffer Solltemperatur"
+        unique_id: boesch_puffer_temperatur_soll
+        slave: 50
+        address: 2
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch TWE Isttemperatur"
+        unique_id: boesch_twe_temperatur_ist
+        slave: 51
+        address: 100
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch TWE Solltemperatur"
+        unique_id: boesch_twe_temperatur_soll
+        slave: 51
+        address: 101
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      # --- HEIZKREISMODUL 1 (Geräte Adresse / Slave 50) ---
+      - name: "Boesch Heizkreis 1 Status"
+        unique_id: boesch_heizkreis1_status
+        slave: 50
+        address: 150
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Isttemperatur"
+        unique_id: boesch_heizkreis1_temperatur_ist
+        slave: 50
+        address: 151
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Solltemperatur"
+        unique_id: boesch_heizkreis1_temperatur_soll
+        slave: 50
+        address: 152
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Betriebsmodus"
+        unique_id: boesch_heizkreis1_betriebsmodus
+        slave: 50
+        address: 153
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Energiemodus"
+        unique_id: boesch_heizkreis1_energiemodus
+        slave: 50
+        address: 155
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Temperaturfuehler T1"
+        unique_id: boesch_heizkreis1_t1
+        slave: 50
+        address: 250
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Temperaturfuehler T2"
+        unique_id: boesch_heizkreis1_t2
+        slave: 50
+        address: 251
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Temperaturfuehler T3"
+        unique_id: boesch_heizkreis1_t3
+        slave: 50
+        address: 252
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 1 Temperaturfuehler T4"
+        unique_id: boesch_heizkreis1_t4
+        slave: 50
+        address: 253
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis Aussentemperatur"
+        unique_id: boesch_heizkreis_aussentemperatur
+        slave: 50
+        address: 254
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Gemittelte Aussentemperatur"
+        unique_id: boesch_gemittelte_aussentemperatur
+        slave: 50
+        address: 255
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      # --- HEIZKREISMODUL 2 (Geräte Adresse / Slave 30) ---
+      - name: "Boesch Heizkreis 2 Status"
+        unique_id: boesch_heizkreis2_status
+        slave: 51
+        address: 150
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Isttemperatur"
+        unique_id: boesch_heizkreis2_temperature_ist
+        slave: 51
+        address: 151
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Solltemperatur"
+        unique_id: boesch_heizkreis2_temperature_soll
+        slave: 51
+        address: 152
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Betriebsmodus"
+        unique_id: boesch_heizkreis2_betriebsmodus
+        slave: 51
+        address: 153
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Energiemodus"
+        unique_id: boesch_heizkreis2_energiemodus
+        slave: 51
+        address: 155
+        input_type: holding
+        data_type: int16
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Temperaturfuehler T1"
+        unique_id: boesch_heizkreis2_t1
+        slave: 51
+        address: 250
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Temperaturfuehler T2"
+        unique_id: boesch_heizkreis2_t2
+        slave: 51
+        address: 251
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Temperaturfuehler T3"
+        unique_id: boesch_heizkreis2_t3
+        slave: 51
+        address: 252
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+      - name: "Boesch Heizkreis 2 Temperaturfuehler T4"
+        unique_id: boesch_heizkreis2_t4
+        slave: 51
+        address: 253
+        input_type: holding
+        data_type: int16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 60
+
+template:
+  - sensor:
+      - name: "Boesch Status Text"
+        unique_id: boesch_status_text
+        state: >
+          {% set status_map = {
+            '0': 'Standby',
+            '1': 'Alarm',
+            '2': 'Warmwasser (TWE)',
+            '3': 'Kühlen',
+            '4': 'Heizen',
+            '5': 'Abtauung',
+            '6': 'Vorbereitung',
+            '7': 'Blockiert',
+            '8': 'EVU Sperre',
+            '9': 'Nicht verfügbar'
+          } %}
+          {% set code = states('sensor.boesch_status_code') | string %}
+          {{ status_map.get(code, 'Unbekannt (' ~ code ~ ')') }}
+
+      - name: "Energy Total Consumption"
+        unique_id: energy_total_consumption_wh
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total
+        state: >
+          {% set pv = states('sensor.technikraum_wechselrichter_pv_energy_total') | float(none) %}
+          {% set imp = states('sensor.technikraum_fronius_smartmeter_real_energy_consumed') | float(none) %}
+          {% set exp = states('sensor.technikraum_fronius_smartmeter_real_energy_produced') | float(none) %}
+          {% set bat = states('sensor.julia_walland_battery_discharging_energy_total') | float(none) %}
+          {% if pv is none or imp is none or exp is none or bat is none %}
+            {{ this.state if this.state not in ['unknown', 'unavailable', none] else 0 }}
+          {% else %}
+            {% set total = pv + imp - exp + bat %}
+            {{ [0, total] | max | round(0) | int }}
+          {% endif %}
+
+      - name: "Energy Self Consumption"
+        unique_id: energy_self_consumption_wh
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total
+        state: >
+          {% set pv = states('sensor.technikraum_wechselrichter_pv_energy_total') | float(none) %}
+          {% set exp = states('sensor.technikraum_fronius_smartmeter_real_energy_produced') | float(none) %}
+          {% if pv is none or exp is none %}
+            {{ this.state if this.state not in ['unknown', 'unavailable', none] else 0 }}
+          {% else %}
+            {% set self_cons = pv - exp %}
+            {{ [0, self_cons] | max | round(0) | int }}
+          {% endif %}
+
+      - name: "Energy Boesch Heat Pump Loss"
+        unique_id: energy_boesch_heat_pump_loss_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total
+        state: >
+          {% set tot = states('sensor.energy_boesch_heat_pump_total') | float(none) %}
+          {% set htg = states('sensor.energy_boesch_heat_pump_heating') | float(none) %}
+          {% set twe = states('sensor.energy_boesch_heat_pump_water') | float(none) %}
+          {% if tot is none or htg is none or twe is none %}
+            {{ this.state if this.state not in ['unknown', 'unavailable', none] else 0 }}
+          {% else %}
+            {% set diff = tot - htg - twe %}
+            {{ [0, diff] | max | round(3) }}
+          {% endif %}
+
+      - name: "Power Household"
+        unique_id: power_household_w
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        state: >
+          {% set load_w = states('sensor.solarnet_power_load_consumed') | float(none) %}
+          {% set hp_kw = states('sensor.boesch_aktuelle_elektrische_leistung_gesamt') | float(none) %}
+          {% if load_w is none or hp_kw is none %}
+            {{ this.state if this.state not in ['unknown', 'unavailable', none] else 0 }}
+          {% else %}
+            {% set hp_w = hp_kw * 1000 %}
+            {{ [0, load_w - hp_w] | max | round(0) | int }}
+          {% endif %}
+
+
+      - name: "Power Self Consumption"
+        unique_id: power_self_consumption_w
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        state: >
+          {% set pv_entity = 'sensor.technikraum_wechselrichter_pv_power' %}
+          {% set exp_entity = 'sensor.technikraum_fronius_smartmeter_real_power_produced' %}
+          {% set pv_raw = states(pv_entity) | float(none) %}
+          {% set exp_raw = states(exp_entity) | float(none) %}
+          {% if pv_raw is none or exp_raw is none %}
+            {{ this.state if this.state not in ['unknown', 'unavailable', none] else 0 }}
+          {% else %}
+            {% set pv_w = pv_raw * 1000 if state_attr(pv_entity, 'unit_of_measurement') == 'kW' else pv_raw %}
+            {% set exp_w = exp_raw * 1000 if state_attr(exp_entity, 'unit_of_measurement') == 'kW' else exp_raw %}
+            {% set self_cons_w = pv_w - [0, exp_w] | max %}
+            {{ [0, self_cons_w] | max | round(0) | int }}
+          {% endif %}
+
+sensor:
+  - platform: integration
+    source: sensor.boesch_aktuelle_elektrische_leistung_gesamt
+    name: "Energy Boesch Heat Pump Total"
+    unique_id: energy_boesch_heat_pump_total_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.boesch_aktuelle_elektrische_leistung_heizen
+    name: "Energy Boesch Heat Pump Heating"
+    unique_id: energy_boesch_heat_pump_heating_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.boesch_aktuelle_elektrische_leistung_twe
+    name: "Energy Boesch Heat Pump Water"
+    unique_id: energy_boesch_heat_pump_water_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.boesch_aktuelle_waermeleistung_gesamt
+    name: "Heat Boesch Heat Pump Total"
+    unique_id: heat_boesch_heat_pump_total_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.boesch_aktuelle_waermeleistung_heizen
+    name: "Heat Boesch Heat Pump Heating"
+    unique_id: heat_boesch_heat_pump_heating_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.boesch_aktuelle_waermeleistung_twe
+    name: "Heat Boesch Heat Pump Water"
+    unique_id: heat_boesch_heat_pump_water_kwh
+    unit_time: h
+    round: 3
+    method: left
+  - platform: integration
+    source: sensor.power_household
+    name: "Energy Household"
+    unique_id: energy_household_wh
+    unit_time: h
+    round: 3
+    method: left
