@@ -36,6 +36,12 @@ ln -s /Users/thomas/Github/configurations/docker/wanderer/docker-compose.yml /Us
 mkdir -p /Users/thomas/Docker/Plex
 ln -s /Users/thomas/Github/configurations/docker/plex/docker-compose.yml /Users/thomas/Docker/Plex/docker-compose.yml
 
+# Nextcloud
+# Has a .env file, so it needs to be created manually
+mkdir -p /Users/thomas/Docker/Nextcloud
+ln -s /Users/thomas/Github/configurations/docker/nextcloud/docker-compose.yml /Users/thomas/Docker/Nextcloud/docker-compose.yml
+
+
 
 
 # Add a section here to reverse link the .env files into the GitHub repo if they exist in the Docker setup folder
